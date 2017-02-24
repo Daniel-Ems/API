@@ -1,7 +1,7 @@
 #include "linked_list.h"
 
 void 
-listInit(List *list, int(*cmp)(void *p1, void *p2), void(*destroy)(void*))
+list_init(List *list, int(*cmp)(void *p1, void *p2), void(*destroy)(void*))
 {
 
 	list = (List*)malloc(sizeof(*List));
@@ -24,7 +24,7 @@ listInit(List *list, int(*cmp)(void *p1, void *p2), void(*destroy)(void*))
 }
 
 int 
-insertNext(List *list, list_node *node, const void *data)
+insert_next(List *list, list_node *node, const void *data)
 {
 
 	list_node *newNode = (list_node*)malloc(list_node);
@@ -36,12 +36,15 @@ insertNext(List *list, list_node *node, const void *data)
 	}
 
 	newNode->data = (void*) data;
+
 	if(node == NULL)
 	{
+
 		if(list->size == 0)
 		{
 			list->tail = newNode;
-		}	
+		}
+	
 		newNode->next = list->head;
 			
 		list->head = newNode;
@@ -49,10 +52,12 @@ insertNext(List *list, list_node *node, const void *data)
 	}
 	else
 	{
+
 		if(node->next == NULL)
 		{
 			list->tail = newNode;
 		}
+
 		newNode->next = node;
 
 		node->next = newNode;
@@ -65,7 +70,43 @@ insertNext(List *list, list_node *node, const void *data)
 }
 
 int 
-removeNext(List *list, list_node *node, void **data)
+is_tail(List *list, list_node *node)
+{
+	if(node == NULL)
+	{
+		return -1;
+	}
+
+	if(node == list->tail)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int 
+is_head(List *list, list_node *node)
+{
+	if(node == NULL)
+	{
+		return -1;
+	}
+
+	if(node == list->head)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int 
+remove_next(List *list, list_node *node, void **data)
 {
 	
 	list_node *oldNode;
@@ -119,41 +160,27 @@ removeNext(List *list, list_node *node, void **data)
 	return 0;
 }
 
-int 
-is_tail(List *list, list_node *node)
+void 
+list_destory(List *list)
 {
-	if(node == NULL)
+	void *data;
+
+	while(list->size > 0)
 	{
-		return -1;
+
+		if(remove_next(list, NULL, (void **)&data == 0 
+						&& list->destroy != NULL))
+		{
+			list->destroy(data);
+		}
 	}
 
-	if(node == list->tail)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
+	memset(list, 0, sizeof(List));
+
+	return; 
 }
 
-int 
-is_head(List *list, list_node *node)
-{
-	if(node == NULL)
-	{
-		return -1;
-	}
 
-	if(node == list->head)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-}
 
 
 	
