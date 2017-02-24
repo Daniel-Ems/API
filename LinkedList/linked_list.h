@@ -30,17 +30,21 @@ typedef struct List{
 }List;
 
 void 
-listInit(List *list, int(*cmp)(void *p1, void *p2), void(*destroy)(void*));
+list_init(List *list, int(*cmp)(void *p1, void *p2), void(*destroy)(void*));
 
 int 
-insertNext(List *list, list_node *node, const void *data);
-
-int 
-removeNext(List *list, list_node *node, void **data);
+insert_next(List *list, list_node *node, const void *data);
 
 int 
 is_tail(List *list, list_node *node);
 
 int
 is_head(List *list, list_node *node);
+
+int 
+remove_next(List *list, list_node *node, void **data);
+
+void 
+list_destory(List *list);
+
 #endif
