@@ -119,6 +119,42 @@ removeNext(List *list, list_node *node, void **data)
 	return 0;
 }
 
+int 
+is_tail(List *list, list_node *node)
+{
+	if(node == NULL)
+	{
+		return -1;
+	}
+
+	if(node == list->tail)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int 
+is_head(List *list, list_node *node)
+{
+	if(node == NULL)
+	{
+		return -1;
+	}
+
+	if(node == list->head)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
 
 	
 	
