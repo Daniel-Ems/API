@@ -38,4 +38,9 @@ insertNext(List *list, list_node *node, const void *data);
 int 
 removeNext(List *list, list_node *node, void **data);
 
+int 
+is_tail(List *list, list_node *node);
+
+int
+is_head(List *list, list_node *node);
 #endif
